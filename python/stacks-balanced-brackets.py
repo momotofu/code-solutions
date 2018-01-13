@@ -8,17 +8,30 @@ def get_closing_symbols():
     return ['}', ']', ')']
 
 def is_matched(expression, symbol_map):
-    # [({})]{}()
+    opening_symbols = get_opening_symbols()
+    index = 0
+    cur = expression
+    while(index != len(cur)):
+        for i in range(0, len(cur)):
+            index += 1
+            # print("cur: ", cur)
+            # check for match
+            a = cur[i]
+            if a in opening_symbols and i + 1 < len(cur):
+                if symbol_map[a] == cur[i + 1]:
+                    cur = cur[:i] + cur[i + 2:]
+                    index = 0
+                    break
 
-    # run splits through stack
-    # check if first half of stack matches last half of splits
-    # return boolean
-    print(split_brackets(expression, symbol_map))
+    if len(cur) == 0:
+        return True
+    else:
+        return False
 
 def split_brackets(expression, symbol_map):
     """
     Separates brackets into groups and returns a list
-    containing those groups.
+    containing those groups. Only works with balanced brackets.
     """
     # split balanced brackets
     # search through brackets until opposite brackets.
@@ -26,7 +39,7 @@ def split_brackets(expression, symbol_map):
     # then capture count brackets forwards
 
     closing_symbols = get_closing_symbols()
-    symbols_list = []
+    brackets_list = []
 
     current_search = expression[0]
 
@@ -36,13 +49,15 @@ def split_brackets(expression, symbol_map):
         for i in range(index, len(expression)):
             if expression[i] in closing_symbols:
                 index += count
-                symbols_list.append(expression[get_brackets_length(symbols_list):index])
+                brackets_list.append(expression[get_brackets_length(brackets_list):index])
                 count = 0
                 break
             count += 1
             index += 1
 
-    return symbols_list
+    print(brackets_list)
+
+    return brackets_list
 
 def get_brackets_length(list):
     output = ''
@@ -51,7 +66,7 @@ def get_brackets_length(list):
     return len(output)
 
 t = int(input().strip())
-for _ in range(t):
+for a0 in range(t):
     expression = input().strip()
     if is_matched(expression, get_symbol_map()) == True:
         print("YES")
