@@ -1,23 +1,45 @@
+class Node(object):
+    def __init__(self, value):
+        self.data = value
+        self.next = None
+
 class MyQueue(object):
     def __init__(self):
-        self.items = []
-        self.length = len(self.items)
+        self.length = 0
+        self.head = None
+        self.tail = None
+
+    def is_empty(self):
+        return self.head == None
 
     def peek(self):
-        return self.items[0]
+        if self.head:
+            return self.head.data
+        else:
+            return None
 
     def deque(self):
-        front = self.items[0]
-        if self.length > 0:
-            self.items = self.items[1:]
-            self.length -= 1
-        else:
-            self.items = []
-        return front
+        data = self.head.data
+        self.head = self.head.next
+        self.length -= 1
+
+        if self.head == None:
+            self.tail = None
+            self.length = 0
+
+        return data
 
     def enque(self, value):
-        self.items.append(value)
+        node = Node(value)
+        if self.tail:
+            self.tail.next = node
+        self.tail = node
+
+        if not self.head:
+            self.head = node
+
         self.length += 1
+
 
 # Get number of lines
 n = int(input())
