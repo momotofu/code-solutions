@@ -39,7 +39,7 @@ class LinkedList(object):
             new_element.next = self.head
             self.head = new_element
         else:
-            prev = get_position(position - 1)
+            prev = self.get_position(position - 1)
             assert prev # ensure position is not out of bounds
             new_element.next = prev.next
             prev.next = new_element
@@ -47,3 +47,13 @@ class LinkedList(object):
 
     def delete(self, value):
         """Delete the first node with a given value."""
+        cur = self.head
+        prev = None
+        while cur:
+            if cur.value == value:
+                if prev:
+                    prev.next = cur.next
+                else:
+                    self.head = cur.next
+            prev = cur
+            cur = cur.next
