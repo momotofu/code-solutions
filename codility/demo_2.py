@@ -6,7 +6,7 @@ def solution(A):
         return 2 if cur == 1 else 1
 
     # sort array and remove duplicates
-    a = list(set(sorted(A)))
+    a = sorted(list(set(A)))
 
     # all negative
     if a[-1] < 1:
