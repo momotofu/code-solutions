@@ -35,6 +35,14 @@ class LinkedList(object):
 
     def insert(self, new_element, position):
         """Insert a new node at the given position."""
+        if position == 1:
+            new_element.next = self.head
+            self.head = new_element
+        else:
+            prev = get_position(position - 1)
+            assert prev # ensure position is not out of bounds
+            new_element.next = prev.next
+            prev.next = new_element
 
 
     def delete(self, value):
