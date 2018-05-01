@@ -19,6 +19,19 @@ class LinkedList(object):
 
     def get_position(self, position):
         """Get an element from a particular position."""
+        if position < 1:
+            return self.head
+        else:
+            counter = 1 # set a counter to keep track of position
+            cur = self.head
+
+            while(cur and counter <= position):
+                if counter == position:
+                    return cur
+                else:
+                    counter += 1
+                    cur = cur.next
+            return None
 
     def insert(self, new_element, position):
         """Insert a new node at the given position."""
