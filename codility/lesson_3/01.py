@@ -1,3 +1,10 @@
+# tests
+
+# empty array
+# single element
+# missing first or last element
+# double element
+
 def solution(A):
     # sort the array
     a = sorted(A)
