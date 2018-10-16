@@ -1,4 +1,5 @@
 #!/bin/python3
+# TODO: simplify to a pythonista approach
 
 import os
 
