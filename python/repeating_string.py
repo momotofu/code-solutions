@@ -1,48 +1,29 @@
 #!/bin/python3
-# TODO: simplify to a pythonista approach
-
 import os
 
-def countOccurancesOfAIn(s, limit):
-    total = 0
 
-    for i in range(limit):
-        if s[i] == 'a':
-            total += 1
-    return total
+def countAsIn(s, n):
+    if len(s) == 1:
+        if s == 'a':
+            return n
+        else:
+            return 0
 
+    occurances = s.count('a')
+    divisions = n // len(s)
+    sub_total = occurances * divisions
+    remainder = s[:n % len(s)].count('a')
 
-def repeatedString(s, n):
-    length = len(s)
-    total = 0
-
-    total += countOccurancesOfAIn(s)
-
-    if n > length:
-        x = round(n / length, 1)
-        times_divided = int(x)
-        remaining_chars = int((x - int(x)) * 10)
-
-    if times_divided > 1:
-        total *= times_divided
-
-    total += countOccurancesOfAIn(s, remaining_chars)
-
-    return total
-
-
-
-
-
+    return sub_total + remainder
 
 
 if __name__ == '__main__':
-    fptr = open(os.inviron['OUTPUT_PATH'], 'w')
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-    s = input()
-    n = int(input())
+    s, n = input(), int(input())
 
-    result = repeatedString(s, n)
+    result = countAsIn(s, n)
 
     fptr.write(str(result) + '\n')
+
     fptr.close()
